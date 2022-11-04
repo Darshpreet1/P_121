@@ -34,11 +34,8 @@ function Speak()
 {
     synth = window.speechSynthesis;
     speak_data_1 = "the first prediction is"+prediction1;
-    speak_data_2 = "the first prediction is"+prediction2;
-    speak_data_3 = "all the best"
-    speak_data_4 = "this is looking amazing"
-    speak_data_5 = "that was a marvelous victory"
-    var utterThis = new SpeechSynthesisUtterance(speak_data_1+speak_data_2+speak_data_3+speak_data_4+speak_data_5)
+    speak_data_2 = "the second prediction is"+prediction2;
+    var utterThis = new SpeechSynthesisUtterance(speak_data_1+speak_data_2)
     synth.speak(utterThis);
 }
 
@@ -57,35 +54,37 @@ function gotresult(error, result){
         document.getElementById("result_hand_name").innerHTML = result[0].label;
         document.getElementById("result_hand_name2").innerHTML = result[1].label;
         
-        prediction1 = result[0].label;
-        prediction2 = result[1].label;
-        speak();
+        Speak()
 
         if(result[0].label == "best"){
             document.getElementById("update_hand").innerHTML = "&#128522;";
-            speak_data_3;speak();
+            prediction1 = "all the best";
+            
         }
 
         if(result[0].label == "amazing"){
             document.getElementById("update_hand").innerHTML = "&#128076;";
-            speak_data_4;speak();
+            prediction1 = "this is looking amazing";
         }
 
         if(result[0].label == "victory"){
             document.getElementById("update_hand").innerHTML = "&#9996;";
-            speak_data_5;speak();
+            prediction1 = "that was a marvelous victory";
         }
 
         if(result[1].label == "best"){
             document.getElementById("update_hand2").innerHTML = "&#128522;";
+            prediction2 = "all the best";
         }
 
         if(result[1].label == "amazing"){
             document.getElementById("update_hand2").innerHTML = "&#128076;";
+            prediction2 = "this is looking amazing";
         }
 
         if(result[1].label == "victory"){
             document.getElementById("update_hand2").innerHTML = "&#9996;";
+            prediction2 = "that was a marvelous victory";
         }
     }
     }
